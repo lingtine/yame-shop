@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
+import "primeicons/primeicons.css";
 import { PrimeReactProvider } from "primereact/api";
 import Tailwind from "primereact/passthrough/tailwind";
+import Header from "./header";
+import Footer from "./footer";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,7 +27,13 @@ export default function RootLayout({
           pt: Tailwind,
         }}
       >
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <main>
+            <Header></Header>
+            <div className="mt-20">{children}</div>
+            <Footer></Footer>
+          </main>
+        </body>
       </PrimeReactProvider>
     </html>
   );
