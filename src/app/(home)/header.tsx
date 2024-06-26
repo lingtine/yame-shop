@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Button } from "primereact/button";
 import { Badge } from "primereact/badge";
-
+import { OverlayPanel } from "primereact/overlaypanel";
+import { useRef } from "react";
 const Header: React.FC = () => {
+  const op = useRef<OverlayPanel | null>(null);
+
   return (
     <header className="w-full bg-black fixed top-0 py-4 flex">
       <div className="container flex justify-between items-center">
@@ -18,6 +23,22 @@ const Header: React.FC = () => {
             src={"/images/logo.png"}
           />
         </Link>
+
+        <Button
+          type="button"
+          label="Bộ sưu tập"
+          text
+          onClick={(e) => {
+            if (op) op.current?.toggle(e);
+          }}
+        />
+
+        <OverlayPanel
+          ref={op}
+          showCloseIcon
+          closeOnEscape
+          dismissable={false}
+        ></OverlayPanel>
 
         <div className="flex">
           <Button
